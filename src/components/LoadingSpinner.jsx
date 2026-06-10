@@ -58,3 +58,5 @@ const LoadingSpinner = ({ fullPage = false }) => {
 };
 
 export default LoadingSpinner;
+
+// Page loader spinner UI guidelines
