@@ -112,7 +112,7 @@ function App() {
             <Route path="admin-users" element={
               <RoleRoute allowedRoles={['admin']}>
                 <AdminUsers />
-              </Route>
+              </RoleRoute>
             } />
             <Route path="admin-prompts" element={
               <RoleRoute allowedRoles={['admin']}>

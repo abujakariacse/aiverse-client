@@ -112,7 +112,7 @@ const Home = () => {
             className="hero-desc"
           >
             Discover, bookmark, and run engineering-grade prompts for ChatGPT, Gemini, Claude, and Midjourney. Boost your productivity today.
-          </p>
+          </motion.p>
 
           {/* Search bar */}
           <motion.form

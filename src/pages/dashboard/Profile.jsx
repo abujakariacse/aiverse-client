@@ -85,7 +85,7 @@ const Profile = () => {
               boxShadow: '0 0 20px rgba(124, 58, 237, 0.4)',
               display: 'flex',
               alignItems: 'center',
-              justify-content: center,
+              justifyContent: 'center',
               fontSize: '2.5rem',
               fontWeight: 700,
               color: '#f8fafc',
