@@ -20,7 +20,7 @@ const AddPrompt = () => {
   const [visibility, setVisibility] = useState('public');
   
   // Image upload state
-  const [thumbnailBase64, setThumbnailBase64] = useState('');
+  const [imageFile, setImageFile] = useState(null);
   const [thumbnailName, setThumbnailName] = useState('');
   const [imagePreview, setImagePreview] = useState('');
   const [btnLoading, setBtnLoading] = useState(false);
@@ -28,18 +28,19 @@ const AddPrompt = () => {
   const categories = ['Coding', 'Writing', 'Marketing', 'Graphics & Image', 'Idea Generation', 'System Assistant', 'Other'];
   const aiTools = ['ChatGPT', 'Gemini', 'Claude', 'Midjourney', 'Stable Diffusion', 'Other'];
 
-  // Handle local file selection -> Convert to base64 for submission
+  // Handle local file selection
   const handleImageFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 2 * 1024 * 1024) {
         return toast.error('File size too large. Maximum size is 2MB.');
       }
+      setImageFile(file);
       setThumbnailName(file.name);
 
+      // FileReader for preview purposes only
       const reader = new FileReader();
       reader.onloadend = () => {
-        setThumbnailBase64(reader.result);
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
@@ -54,6 +55,28 @@ const AddPrompt = () => {
 
     try {
       setBtnLoading(true);
+
+      let uploadedImageUrl = '';
+
+      // Upload file to Cloudinary first if present
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+        const uploadRes = await fetch(`${API_URL}/upload`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) {
+          throw new Error(uploadData.message || 'Image upload failed');
+        }
+        uploadedImageUrl = uploadData.secure_url;
+      }
       
       // Split tags by comma, trim whitespaces
       const tagsArray = tags
@@ -75,7 +98,7 @@ const AddPrompt = () => {
           aiTool,
           tags: tagsArray,
           difficulty,
-          thumbnailURL: thumbnailBase64, // Stored as base64 string
+          thumbnailURL: uploadedImageUrl,
           visibility,
         }),
       });
@@ -90,7 +113,7 @@ const AddPrompt = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error('Network error creating prompt');
+      toast.error(error.message || 'Network error creating prompt');
     } finally {
       setBtnLoading(false);
     }
