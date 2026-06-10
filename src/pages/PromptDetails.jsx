@@ -531,3 +531,5 @@ const PromptDetails = () => {
 };
 
 export default PromptDetails;
+
+// Prompts lock state and clipboard copies documentation
