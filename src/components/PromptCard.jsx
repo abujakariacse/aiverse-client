@@ -29,6 +29,17 @@ const PromptCard = ({ prompt }) => {
       transition={{ duration: 0.3 }}
       whileHover={{ y: -6, borderColor: 'rgba(124, 58, 237, 0.4)' }}
     >
+      {/* Thumbnail Image */}
+      <div className="prompt-card-thumbnail">
+        {prompt.thumbnailURL ? (
+          <img src={prompt.thumbnailURL} alt={prompt.title} className="thumbnail-img" />
+        ) : (
+          <div className="thumbnail-placeholder">
+            <Sparkles size={24} className="placeholder-icon" />
+          </div>
+        )}
+      </div>
+
       {/* Card Header Info */}
       <div className="card-header">
         <span className={`badge ${getToolBadgeClass(prompt.aiTool)}`}>
