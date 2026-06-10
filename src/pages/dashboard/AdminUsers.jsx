@@ -188,3 +188,5 @@ const AdminUsers = () => {
 };
 
 export default AdminUsers;
+
+// User modification columns layout notes
