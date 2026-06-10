@@ -116,3 +116,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// Navigation menu bar responsive display rules documentation
