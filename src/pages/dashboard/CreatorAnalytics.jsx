@@ -218,3 +218,5 @@ const CreatorAnalytics = () => {
 };
 
 export default CreatorAnalytics;
+
+// Recharts area growth analytics chart details
