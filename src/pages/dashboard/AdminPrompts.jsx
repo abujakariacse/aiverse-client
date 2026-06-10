@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://aiverse-server-two.vercel.app/api';
 
 const AdminPrompts = () => {
   const { token } = useAuth();

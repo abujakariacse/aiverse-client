@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 import { PlusCircle, Upload, Eye, Image as ImageIcon } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://aiverse-server-two.vercel.app/api';
 
 const AddPrompt = () => {
   const { token } = useAuth();

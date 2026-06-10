@@ -10,7 +10,7 @@ import {
 import LoadingSpinner from '../components/LoadingSpinner';
 import './PromptDetails.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://aiverse-server-two.vercel.app/api';
 
 const PromptDetails = () => {
   const { id } = useParams();

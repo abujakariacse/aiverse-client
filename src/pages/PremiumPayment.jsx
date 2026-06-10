@@ -9,7 +9,7 @@ import { Gem, Check, CreditCard, ShieldCheck, HelpCircle } from 'lucide-react';
 import './PremiumPayment.css';
 
 const STRIPE_PUBLIC_KEY = import.meta.env.VITE_STRIPE_PUBLIC_KEY || 'pk_test_mock_fallback_key';
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://aiverse-server-two.vercel.app/api';
 
 // Initialize Stripe outside rendering
 let stripePromise;
