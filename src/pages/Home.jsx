@@ -423,3 +423,5 @@ const Home = () => {
 };
 
 export default Home;
+
+// Landing page section layouts
