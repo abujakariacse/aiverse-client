@@ -77,3 +77,5 @@ const NotFound = () => {
 };
 
 export default NotFound;
+
+// 404 page route routing documentation
