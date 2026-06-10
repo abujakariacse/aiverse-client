@@ -36,3 +36,5 @@ export const RoleRoute = ({ children, allowedRoles }) => {
 
   return children;
 };
+
+// Route guards validation documentation
