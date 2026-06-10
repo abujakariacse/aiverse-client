@@ -86,3 +86,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+// Footer links collection details
