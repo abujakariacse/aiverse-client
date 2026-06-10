@@ -160,3 +160,5 @@ const Login = () => {
 };
 
 export default Login;
+
+// Login form actions documentation
