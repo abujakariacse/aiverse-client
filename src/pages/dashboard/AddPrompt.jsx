@@ -322,3 +322,5 @@ const AddPrompt = () => {
 };
 
 export default AddPrompt;
+
+// Thumbnail drag uploader specs details
