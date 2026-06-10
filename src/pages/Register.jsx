@@ -208,3 +208,5 @@ const Register = () => {
 };
 
 export default Register;
+
+// Account creation parameters validation details
