@@ -186,3 +186,5 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
+
+// Sidebar dynamic actions based on role scope
