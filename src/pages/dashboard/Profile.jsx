@@ -190,3 +190,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+// User info dashboard card details
