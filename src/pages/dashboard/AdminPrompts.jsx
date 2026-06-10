@@ -294,3 +294,5 @@ const AdminPrompts = () => {
 };
 
 export default AdminPrompts;
+
+// Admin approval statuses options details
