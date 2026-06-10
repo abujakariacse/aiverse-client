@@ -152,3 +152,5 @@ const SavedPrompts = () => {
 };
 
 export default SavedPrompts;
+
+// Bookmarked cards mapping specifications
