@@ -257,3 +257,5 @@ const PremiumPayment = () => {
 };
 
 export default PremiumPayment;
+
+// Stripe Checkout wrapper configurations
