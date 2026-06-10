@@ -255,3 +255,5 @@ const AdminAnalytics = () => {
 };
 
 export default AdminAnalytics;
+
+// Recharts pie chart rendering configurations
