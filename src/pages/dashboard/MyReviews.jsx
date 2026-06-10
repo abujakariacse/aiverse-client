@@ -125,3 +125,5 @@ const MyReviews = () => {
 };
 
 export default MyReviews;
+
+// Submitted ratings list logs details
