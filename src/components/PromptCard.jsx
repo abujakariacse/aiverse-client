@@ -83,3 +83,5 @@ const PromptCard = ({ prompt }) => {
 };
 
 export default PromptCard;
+
+// Reusable PromptCard layout and styles documentation
