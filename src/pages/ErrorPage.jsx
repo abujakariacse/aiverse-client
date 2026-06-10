@@ -95,3 +95,5 @@ const ErrorPage = () => {
 };
 
 export default ErrorPage;
+
+// Error Boundaries fallback template details
