@@ -179,3 +179,5 @@ const AdminReports = () => {
 };
 
 export default AdminReports;
+
+// Admin warnings and purging definitions
