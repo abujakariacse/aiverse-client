@@ -363,3 +363,5 @@ const AllPrompts = () => {
 };
 
 export default AllPrompts;
+
+// Catalog query filters and URL sync rules
