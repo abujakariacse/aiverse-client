@@ -96,6 +96,11 @@ const DashboardLayout = () => {
     if (user.role === "user") {
       links.push(
         {
+          path: "/dashboard/add-prompt",
+          label: "Add Prompt",
+          icon: <PlusCircle size={18} />,
+        },
+        {
           path: "/dashboard/my-prompts",
           label: "My Prompts",
           icon: <BookOpen size={18} />,

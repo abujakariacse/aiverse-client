@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
-import { PlusCircle, Upload, Eye, Image as ImageIcon } from 'lucide-react';
+import { PlusCircle, Upload, Eye, Image as ImageIcon, AlertTriangle } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://aiverse-server-two.vercel.app/api';
 
 const AddPrompt = () => {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -24,9 +24,35 @@ const AddPrompt = () => {
   const [thumbnailName, setThumbnailName] = useState('');
   const [imagePreview, setImagePreview] = useState('');
   const [btnLoading, setBtnLoading] = useState(false);
+  const [isLimitReached, setIsLimitReached] = useState(false);
+  const [loadingLimit, setLoadingLimit] = useState(true);
 
   const categories = ['Coding', 'Writing', 'Marketing', 'Graphics & Image', 'Idea Generation', 'System Assistant', 'Other'];
   const aiTools = ['ChatGPT', 'Gemini', 'Claude', 'Midjourney', 'Stable Diffusion', 'Other'];
+
+  useEffect(() => {
+    const checkLimit = async () => {
+      if (user?.subscriptionStatus === 'free') {
+        try {
+          const response = await fetch(`${API_URL}/prompts/my-prompts`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            if (data.length >= 3) {
+              setIsLimitReached(true);
+            }
+          }
+        } catch (error) {
+          console.error('Error checking prompt limit:', error);
+        }
+      }
+      setLoadingLimit(false);
+    };
+    checkLimit();
+  }, [user, token]);
 
   // Handle local file selection
   const handleImageFileChange = (e) => {
@@ -127,7 +153,29 @@ const AddPrompt = () => {
         <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Fill in details to submit a prompt to the community catalog.</p>
       </div>
 
-      <div className="glass-panel" style={{ padding: '40px', maxWidth: '800px' }}>
+      {isLimitReached && (
+        <div style={{
+          backgroundColor: 'rgba(239, 68, 68, 0.1)',
+          border: '1px solid rgba(239, 68, 68, 0.3)',
+          color: '#f87171',
+          padding: '16px',
+          borderRadius: '8px',
+          marginBottom: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px'
+        }}>
+          <AlertTriangle size={24} />
+          <div>
+            <strong style={{ display: 'block', fontSize: '1rem' }}>Free Tier Limit Reached</strong>
+            <span style={{ fontSize: '0.9rem' }}>You can only create up to 3 prompts on the free plan. </span>
+            <Link to="/premium" style={{ color: '#60a5fa', textDecoration: 'underline' }}>Upgrade to Premium</Link>
+            <span style={{ fontSize: '0.9rem' }}> to add unlimited prompts!</span>
+          </div>
+        </div>
+      )}
+
+      <div className="glass-panel" style={{ padding: '40px', maxWidth: '800px', opacity: isLimitReached ? 0.6 : 1, pointerEvents: isLimitReached ? 'none' : 'auto' }}>
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label className="form-label" htmlFor="prompt-title">Prompt Title *</label>
@@ -139,7 +187,7 @@ const AddPrompt = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              disabled={btnLoading}
+              disabled={btnLoading || isLimitReached || loadingLimit}
             />
           </div>
 

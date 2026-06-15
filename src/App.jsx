@@ -100,7 +100,7 @@ function App() {
               </RoleRoute>
             } />
             <Route path="add-prompt" element={
-              <RoleRoute allowedRoles={['creator', 'admin']}>
+              <RoleRoute allowedRoles={['user', 'creator', 'admin']}>
                 <AddPrompt />
               </RoleRoute>
             } />
