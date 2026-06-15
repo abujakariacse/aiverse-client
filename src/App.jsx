@@ -17,6 +17,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PremiumPayment from './pages/PremiumPayment';
 import NotFound from './pages/NotFound';
+import DemoUser from './pages/DemoUser';
 
 // Dashboard layout & pages
 import DashboardLayout from './pages/dashboard/DashboardLayout';
@@ -60,6 +61,7 @@ function App() {
             <Route path="prompts" element={<AllPrompts />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="demo-user" element={<DemoUser />} />
             
             {/* Private Details and checkout payment pages */}
             <Route path="prompts/:id" element={

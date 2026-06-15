@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
-import { Link, NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { 
-  User, LayoutDashboard, PlusCircle, BookOpen, Bookmark, 
-  MessageSquare, Users, CreditCard, ShieldAlert, BarChart3, 
-  LogOut, Menu, X, Sparkles, Gem 
-} from 'lucide-react';
-import './DashboardLayout.css';
+import React, { useState } from "react";
+import { Link, NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import {
+  User,
+  LayoutDashboard,
+  PlusCircle,
+  BookOpen,
+  Bookmark,
+  MessageSquare,
+  Users,
+  CreditCard,
+  ShieldAlert,
+  BarChart3,
+  LogOut,
+  Menu,
+  X,
+  Sparkles,
+  Gem,
+} from "lucide-react";
+import "./DashboardLayout.css";
 
 const DashboardLayout = () => {
   const { user, logout } = useAuth();
@@ -16,7 +28,7 @@ const DashboardLayout = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/');
+    navigate("/");
   };
 
   const getMenuLinks = () => {
@@ -26,78 +38,78 @@ const DashboardLayout = () => {
 
     // All logged in users see Profile
     links.push({
-      path: '/dashboard/profile',
-      label: 'My Profile',
+      path: "/dashboard/profile",
+      label: "My Profile",
       icon: <User size={18} />,
     });
 
-    if (user.role === 'admin') {
+    if (user.role === "admin") {
       links.push(
         {
-          path: '/dashboard/admin-analytics',
-          label: 'Admin Analytics',
+          path: "/dashboard/admin-analytics",
+          label: "Admin Analytics",
           icon: <BarChart3 size={18} />,
         },
         {
-          path: '/dashboard/admin-users',
-          label: 'All Users',
+          path: "/dashboard/admin-users",
+          label: "All Users",
           icon: <Users size={18} />,
         },
         {
-          path: '/dashboard/admin-prompts',
-          label: 'All Prompts',
+          path: "/dashboard/admin-prompts",
+          label: "All Prompts",
           icon: <BookOpen size={18} />,
         },
         {
-          path: '/dashboard/admin-payments',
-          label: 'All Payments',
+          path: "/dashboard/admin-payments",
+          label: "All Payments",
           icon: <CreditCard size={18} />,
         },
         {
-          path: '/dashboard/admin-reports',
-          label: 'Reported Prompts',
+          path: "/dashboard/admin-reports",
+          label: "Reported Prompts",
           icon: <ShieldAlert size={18} />,
-        }
+        },
       );
     }
 
-    if (user.role === 'creator') {
+    if (user.role === "creator") {
       links.push(
         {
-          path: '/dashboard/creator-analytics',
-          label: 'Creator Home',
+          path: "/dashboard/creator-analytics",
+          label: "Creator Home",
           icon: <LayoutDashboard size={18} />,
         },
         {
-          path: '/dashboard/add-prompt',
-          label: 'Add Prompt',
+          path: "/dashboard/add-prompt",
+          label: "Add Prompt",
           icon: <PlusCircle size={18} />,
         },
         {
-          path: '/dashboard/my-prompts',
-          label: 'My Prompts',
+          path: "/dashboard/my-prompts",
+          label: "My Prompts",
           icon: <BookOpen size={18} />,
-        }
+        },
       );
     }
 
-    if (user.role === 'user') {
+    if (user.role === "user") {
       links.push(
         {
-          path: '/dashboard/my-prompts',
-          label: 'My Prompts',
+          path: "/dashboard/my-prompts",
+          label: "My Prompts",
           icon: <BookOpen size={18} />,
         },
         {
-          path: '/dashboard/saved-prompts',
-          label: 'Saved Prompts',
+          path: "/dashboard/saved-prompts",
+          label: "Saved Prompts",
           icon: <Bookmark size={18} />,
         },
         {
-          path: '/dashboard/my-reviews',
-          label: 'My Reviews',
+          path: "/dashboard/my-reviews",
+          label: "My Reviews",
           icon: <MessageSquare size={18} />,
-        }
+        },
       );
     }
 
@@ -115,23 +127,29 @@ const DashboardLayout = () => {
         </button>
         <Link to="/" className="mobile-header-logo">
           <Sparkles className="logo-icon" />
-          <span>AI<span className="text-gradient">verse</span></span>
+          <span>
+            AI<span className="text-gradient">verse</span>
+          </span>
         </Link>
         <div className="profile-indicator">
-          {user?.subscriptionStatus === 'premium' && <Gem size={14} className="text-secondary" />}
+          {user?.subscriptionStatus === "premium" && <Gem size={14} className="text-secondary" />}
         </div>
       </div>
 
       <div className="dashboard-container">
         {/* SIDEBAR */}
-        <aside className={`dashboard-sidebar glass-panel ${sidebarOpen ? 'open' : ''}`}>
+        <aside className={`dashboard-sidebar glass-panel ${sidebarOpen ? "open" : ""}`}>
           <div className="sidebar-brand-section">
             <Link to="/" className="sidebar-logo">
               <Sparkles className="logo-icon" />
-              <span>AI<span className="text-gradient">verse</span></span>
+              <span>
+                AI<span className="text-gradient">verse</span>
+              </span>
             </Link>
-            {user?.subscriptionStatus === 'premium' && (
-              <span className="premium-sidebar-badge"><Gem size={12} /> PRO</span>
+            {user?.subscriptionStatus === "premium" && (
+              <span className="premium-sidebar-badge">
+                <Gem size={12} /> PRO
+              </span>
             )}
           </div>
 
@@ -139,9 +157,7 @@ const DashboardLayout = () => {
             {user?.photoURL ? (
               <img src={user.photoURL} alt={user.name} className="sidebar-avatar" />
             ) : (
-              <div className="sidebar-avatar-fallback">
-                {user?.name.charAt(0).toUpperCase()}
-              </div>
+              <div className="sidebar-avatar-fallback">{user?.name.charAt(0).toUpperCase()}</div>
             )}
             <div className="sidebar-user-details">
               <h4>{user?.name}</h4>
@@ -154,7 +170,7 @@ const DashboardLayout = () => {
               <NavLink
                 key={i}
                 to={link.path}
-                className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+                className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
                 onClick={() => setSidebarOpen(false)}
               >
                 {link.icon}

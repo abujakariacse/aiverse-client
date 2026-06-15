@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
@@ -7,14 +7,24 @@ import { LogIn, Sparkles, AlertCircle } from 'lucide-react';
 import './AuthPages.css';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [btnLoading, setBtnLoading] = useState(false);
 
   const { login, googleLogin } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.prefilledEmail) {
+      setEmail(location.state.prefilledEmail);
+    }
+    if (location.state?.prefilledPassword) {
+      setPassword(location.state.prefilledPassword);
+    }
+  }, [location.state]);
 
   // Redirect to home or path before redirect
   const from = location.state?.from?.pathname || '/';

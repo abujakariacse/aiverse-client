@@ -27,6 +27,7 @@ const Footer = () => {
               <li><Link to="/prompts?sortBy=popular">Trending Prompts</Link></li>
               <li><Link to="/login">Login</Link></li>
               <li><Link to="/register">Register</Link></li>
+              <li><Link to="/demo-user">Demo User</Link></li>
             </ul>
           </div>
 
